@@ -4,11 +4,13 @@
 
 @layer base {
   /**
-   * Smart Todo - AI-Powered Task Management
-   * Improved color scheme with better contrast and AI-focused theme
+   * Smart Todo - Dark Mode First Design
+   * Default: Black, White, Green theme
+   * Optional Light Mode: White, Blue, Red, Green
    */
   :root {
-    --background: 252 252 255;
+    /* Light mode (optional) - White, Blue, Red, Green */
+    --background: 255 255 255;
     --foreground: 15 23 42;
 
     --card: 255 255 255;
@@ -17,7 +19,7 @@
     --popover: 255 255 255;
     --popover-foreground: 15 23 42;
 
-    --primary: 99 102 241;
+    --primary: 37 99 235;
     --primary-foreground: 255 255 255;
 
     --secondary: 241 245 249;
@@ -26,7 +28,7 @@
     --muted: 248 250 252;
     --muted-foreground: 100 116 139;
 
-    --accent: 168 85 247;
+    --accent: 34 197 94;
     --accent-foreground: 255 255 255;
 
     --destructive: 239 68 68;
@@ -35,80 +37,87 @@
     --success: 34 197 94;
     --success-foreground: 255 255 255;
 
-    --warning: 245 158 11;
+    --warning: 239 68 68;
     --warning-foreground: 255 255 255;
 
     --border: 226 232 240;
     --input: 241 245 249;
-    --ring: 99 102 241;
+    --ring: 37 99 235;
 
     --radius: 0.75rem;
 
-    /* AI-themed colors */
-    --ai-primary: 99 102 241;
-    --ai-secondary: 168 85 247;
-    --ai-accent: 14 165 233;
-    --ai-glow: 139 92 246;
+    /* Light mode AI colors */
+    --ai-primary: 37 99 235;
+    --ai-secondary: 34 197 94;
+    --ai-accent: 239 68 68;
+    --ai-glow: 34 197 94;
+    --priority-high: 239 68 68;
+    --priority-medium: 245 158 11;
+    --priority-low: 34 197 94;
+    --priority-urgent: 239 68 68;
+
+    /* Chat colors */
+    --chat-user: 37 99 235;
+    --chat-ai: 34 197 94;
+    --chat-bg: 248 250 252;
+  }
+
+  /* Dark mode (default) - Black, White, Green */
+  .dark,
+  :root {
+    --background: 0 0 0;
+    --foreground: 255 255 255;
+
+    --card: 15 15 15;
+    --card-foreground: 255 255 255;
+
+    --popover: 15 15 15;
+    --popover-foreground: 255 255 255;
+
+    --primary: 34 197 94;
+    --primary-foreground: 0 0 0;
+
+    --secondary: 30 30 30;
+    --secondary-foreground: 255 255 255;
+
+    --muted: 25 25 25;
+    --muted-foreground: 160 160 160;
+
+    --accent: 34 197 94;
+    --accent-foreground: 0 0 0;
+
+    --destructive: 239 68 68;
+    --destructive-foreground: 255 255 255;
+
+    --success: 34 197 94;
+    --success-foreground: 0 0 0;
+
+    --warning: 245 158 11;
+    --warning-foreground: 0 0 0;
+
+    --border: 45 45 45;
+    --input: 25 25 25;
+    --ring: 34 197 94;
+
+    /* Dark mode AI colors - Black, White, Green theme */
+    --ai-primary: 34 197 94;
+    --ai-secondary: 74 222 128;
+    --ai-accent: 16 185 129;
+    --ai-glow: 34 197 94;
     --priority-high: 239 68 68;
     --priority-medium: 245 158 11;
     --priority-low: 34 197 94;
     --priority-urgent: 220 38 127;
 
-    /* Chat colors */
-    --chat-user: 99 102 241;
-    --chat-ai: 168 85 247;
-    --chat-bg: 248 250 252;
+    /* Dark chat colors */
+    --chat-user: 255 255 255;
+    --chat-ai: 34 197 94;
+    --chat-bg: 15 15 15;
   }
 
-  .dark {
-    --background: 15 23 42;
-    --foreground: 241 245 249;
-
-    --card: 30 41 59;
-    --card-foreground: 241 245 249;
-
-    --popover: 30 41 59;
-    --popover-foreground: 241 245 249;
-
-    --primary: 129 140 248;
-    --primary-foreground: 15 23 42;
-
-    --secondary: 51 65 85;
-    --secondary-foreground: 203 213 225;
-
-    --muted: 51 65 85;
-    --muted-foreground: 148 163 184;
-
-    --accent: 196 181 253;
-    --accent-foreground: 15 23 42;
-
-    --destructive: 248 113 113;
-    --destructive-foreground: 255 255 255;
-
-    --success: 74 222 128;
-    --success-foreground: 15 23 42;
-
-    --warning: 251 191 36;
-    --warning-foreground: 15 23 42;
-
-    --border: 51 65 85;
-    --input: 30 41 59;
-    --ring: 129 140 248;
-
-    /* Dark mode AI colors */
-    --ai-primary: 129 140 248;
-    --ai-secondary: 196 181 253;
-    --ai-accent: 56 189 248;
-    --ai-glow: 167 139 250;
-    --priority-high: 248 113 113;
-    --priority-medium: 251 191 36;
-    --priority-low: 74 222 128;
-    --priority-urgent: 244 114 182;
-
-    /* Dark chat colors */
-    --chat-user: 129 140 248;
-    --chat-ai: 196 181 253;
-    --chat-bg: 30 41 59;
+  /* Force dark mode */
+  html {
+    color-scheme: dark;
   }
 }
 
@@ -122,25 +131,32 @@
     font-feature-settings:
       "rlig" 1,
       "calt" 1;
+    /* Force dark mode */
+    color-scheme: dark;
   }
 
   /* Smooth animations */
   * {
     transition: colors 0.2s ease-in-out;
   }
+
+  /* Force dark scrollbars */
+  ::-webkit-scrollbar {
+    background: black;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #22c55e;
+  }
 }
 
 @layer components {
-  /* Enhanced glass morphism effect */
+  /* Enhanced glass morphism for dark theme */
   .glass {
-    @apply bg-white/70 backdrop-blur-xl border border-white/30 shadow-xl;
+    @apply bg-black/80 backdrop-blur-xl border border-green-500/20 shadow-2xl;
   }
 
-  .dark .glass {
-    @apply bg-slate-800/70 backdrop-blur-xl border border-slate-600/30;
-  }
-
-  /* AI-themed gradients */
+  /* AI-themed gradients - Green focused */
   .gradient-ai {
     background: linear-gradient(
       135deg,
@@ -157,56 +173,57 @@
     );
   }
 
-  /* AI glow effects */
+  /* AI glow effects - Green glow */
   .ai-glow {
-    box-shadow: 0 0 20px hsl(var(--ai-glow) / 0.3);
+    box-shadow: 0 0 20px hsl(var(--ai-glow) / 0.4);
   }
 
   .ai-glow-strong {
-    box-shadow: 0 0 40px hsl(var(--ai-glow) / 0.5);
+    box-shadow: 0 0 40px hsl(var(--ai-glow) / 0.6);
   }
 
-  /* Chat bubbles */
+  /* Chat bubbles - Dark theme */
   .chat-user {
-    @apply bg-blue-600 text-white rounded-2xl rounded-br-md;
+    @apply bg-white text-black rounded-2xl rounded-br-md;
   }
 
   .chat-ai {
-    @apply bg-purple-600 text-white rounded-2xl rounded-bl-md;
+    @apply bg-green-600 text-white rounded-2xl rounded-bl-md;
   }
 
-  /* Priority indicators */
+  /* Priority indicators - Dark optimized */
   .priority-urgent {
-    @apply bg-pink-600 text-white;
+    @apply bg-pink-600 text-white border-pink-500;
   }
 
   .priority-high {
-    @apply bg-red-500 text-white;
+    @apply bg-red-600 text-white border-red-500;
   }
 
   .priority-medium {
-    @apply bg-amber-500 text-white;
+    @apply bg-yellow-600 text-black border-yellow-500;
   }
 
   .priority-low {
-    @apply bg-green-500 text-white;
+    @apply bg-green-600 text-white border-green-500;
   }
 
-  /* Custom scrollbar */
+  /* Custom scrollbar - Dark theme */
   .custom-scrollbar::-webkit-scrollbar {
     width: 6px;
+    background: black;
   }
 
   .custom-scrollbar::-webkit-scrollbar-track {
-    @apply bg-muted/30 rounded-full;
+    @apply bg-black rounded-full;
   }
 
   .custom-scrollbar::-webkit-scrollbar-thumb {
-    @apply bg-muted-foreground/40 rounded-full;
+    @apply bg-green-600 rounded-full;
   }
 
   .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-    @apply bg-muted-foreground/60;
+    @apply bg-green-500;
   }
 
   /* Floating animation */
@@ -224,7 +241,7 @@
     }
   }
 
-  /* Pulse glow animation */
+  /* Pulse glow animation - Green */
   .pulse-glow {
     animation: pulse-glow 2s ease-in-out infinite;
   }
@@ -232,14 +249,14 @@
   @keyframes pulse-glow {
     0%,
     100% {
-      box-shadow: 0 0 20px hsl(var(--ai-glow) / 0.3);
+      box-shadow: 0 0 20px hsl(var(--ai-glow) / 0.4);
     }
     50% {
-      box-shadow: 0 0 40px hsl(var(--ai-glow) / 0.6);
+      box-shadow: 0 0 40px hsl(var(--ai-glow) / 0.7);
     }
   }
 
-  /* AI text gradient */
+  /* AI text gradient - Green theme */
   .text-ai-gradient {
     background: linear-gradient(
       135deg,
@@ -249,5 +266,40 @@
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
+  }
+
+  /* Dark mode specific enhancements */
+  .dark-card {
+    @apply bg-gray-900/50 border border-green-500/20;
+  }
+
+  .dark-button {
+    @apply bg-green-600 hover:bg-green-500 text-white;
+  }
+
+  .dark-input {
+    @apply bg-black border-green-500/30 text-white placeholder-gray-400;
+  }
+
+  /* Loading animations */
+  .loading-dots {
+    animation: loading-dots 1.5s infinite;
+  }
+
+  @keyframes loading-dots {
+    0%,
+    20% {
+      color: rgb(34, 197, 94);
+      transform: scale(1);
+    }
+    50% {
+      color: rgb(74, 222, 128);
+      transform: scale(1.2);
+    }
+    80%,
+    100% {
+      color: rgb(34, 197, 94);
+      transform: scale(1);
+    }
   }
 }

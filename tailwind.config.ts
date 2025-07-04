@@ -55,7 +55,7 @@ export default {
           DEFAULT: "hsl(var(--warning))",
           foreground: "hsl(var(--warning-foreground))",
         },
-        // Enhanced AI colors
+        // Dark-first AI colors (Green theme)
         ai: {
           primary: "hsl(var(--ai-primary))",
           secondary: "hsl(var(--ai-secondary))",
@@ -72,6 +72,14 @@ export default {
           user: "hsl(var(--chat-user))",
           ai: "hsl(var(--chat-ai))",
           bg: "hsl(var(--chat-bg))",
+        },
+        // Dark theme specific colors
+        dark: {
+          bg: "rgb(0, 0, 0)",
+          card: "rgb(15, 15, 15)",
+          border: "rgb(45, 45, 45)",
+          text: "rgb(255, 255, 255)",
+          muted: "rgb(160, 160, 160)",
         },
       },
       borderRadius: {
@@ -134,10 +142,10 @@ export default {
         },
         "pulse-glow": {
           "0%, 100%": {
-            boxShadow: "0 0 20px hsl(var(--ai-glow) / 0.3)",
+            boxShadow: "0 0 20px rgb(34 197 94 / 0.4)",
           },
           "50%": {
-            boxShadow: "0 0 40px hsl(var(--ai-glow) / 0.6)",
+            boxShadow: "0 0 40px rgb(34 197 94 / 0.7)",
           },
         },
         typing: {
@@ -146,6 +154,20 @@ export default {
           },
           "100%": {
             width: "100%",
+          },
+        },
+        "loading-dots": {
+          "0%, 20%": {
+            color: "rgb(34, 197, 94)",
+            transform: "scale(1)",
+          },
+          "50%": {
+            color: "rgb(74, 222, 128)",
+            transform: "scale(1.2)",
+          },
+          "80%, 100%": {
+            color: "rgb(34, 197, 94)",
+            transform: "scale(1)",
           },
         },
       },
@@ -158,16 +180,24 @@ export default {
         float: "float 3s ease-in-out infinite",
         "pulse-glow": "pulse-glow 2s ease-in-out infinite",
         typing: "typing 2s steps(20, end) infinite",
+        "loading-dots": "loading-dots 1.5s infinite",
       },
       fontFamily: {
         sans: ["Inter", "system-ui", "sans-serif"],
       },
       boxShadow: {
-        glass: "0 8px 32px 0 rgba(31, 38, 135, 0.37)",
-        card: "0 4px 20px 0 rgba(0, 0, 0, 0.05)",
-        "card-hover": "0 8px 30px 0 rgba(0, 0, 0, 0.12)",
-        glow: "0 0 20px hsl(var(--ai-glow) / 0.3)",
-        "glow-strong": "0 0 40px hsl(var(--ai-glow) / 0.5)",
+        glass: "0 8px 32px 0 rgba(0, 0, 0, 0.7)",
+        card: "0 4px 20px 0 rgba(0, 0, 0, 0.3)",
+        "card-hover": "0 8px 30px 0 rgba(0, 0, 0, 0.5)",
+        glow: "0 0 20px rgb(34 197 94 / 0.4)",
+        "glow-strong": "0 0 40px rgb(34 197 94 / 0.6)",
+        "green-glow": "0 0 30px rgb(34 197 94 / 0.5)",
+      },
+      backgroundImage: {
+        "dark-gradient":
+          "linear-gradient(to bottom right, rgb(0, 0, 0), rgb(15, 15, 15), rgb(0, 0, 0))",
+        "green-gradient":
+          "linear-gradient(135deg, rgb(34, 197, 94), rgb(74, 222, 128))",
       },
     },
   },

@@ -9,6 +9,7 @@ import {
   Zap,
   Sparkles,
   TrendingUp,
+  Activity,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -73,23 +74,21 @@ export default function Index() {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-slate-50 via-purple-50 to-blue-50 dark:from-slate-900 dark:via-purple-950 dark:to-blue-950 flex items-center justify-center">
-        <div className="text-center space-y-4">
-          <div className="h-16 w-16 rounded-full gradient-ai mx-auto flex items-center justify-center pulse-glow">
-            <Brain className="h-8 w-8 text-white animate-pulse" />
+      <div className="min-h-screen bg-black flex items-center justify-center">
+        <div className="text-center space-y-6">
+          <div className="h-20 w-20 rounded-full bg-green-600 mx-auto flex items-center justify-center pulse-glow">
+            <Brain className="h-10 w-10 text-white animate-pulse" />
           </div>
-          <div className="space-y-2">
-            <h3 className="text-xl font-semibold text-ai-gradient">
+          <div className="space-y-3">
+            <h3 className="text-2xl font-bold text-white">
               AI is analyzing your tasks...
             </h3>
-            <p className="text-muted-foreground">
-              Preparing intelligent insights
-            </p>
+            <p className="text-gray-400">Preparing intelligent insights</p>
           </div>
-          <div className="flex justify-center space-x-1">
-            <div className="w-2 h-2 bg-ai-primary rounded-full animate-bounce"></div>
-            <div className="w-2 h-2 bg-ai-secondary rounded-full animate-bounce delay-75"></div>
-            <div className="w-2 h-2 bg-ai-accent rounded-full animate-bounce delay-150"></div>
+          <div className="flex justify-center space-x-2">
+            <div className="w-3 h-3 bg-green-500 rounded-full animate-bounce"></div>
+            <div className="w-3 h-3 bg-green-400 rounded-full animate-bounce delay-75"></div>
+            <div className="w-3 h-3 bg-green-600 rounded-full animate-bounce delay-150"></div>
           </div>
         </div>
       </div>
@@ -97,64 +96,71 @@ export default function Index() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-purple-50 to-blue-50 dark:from-slate-900 dark:via-purple-950 dark:to-blue-950">
+    <div className="min-h-screen bg-black">
       <div className="flex">
         <Sidebar />
 
         <main className="flex-1 lg:ml-64">
-          {/* Enhanced Header */}
-          <div className="sticky top-0 z-10 glass border-b p-6">
+          {/* Dark Header with Green Accents */}
+          <div className="sticky top-0 z-10 glass border-b border-green-500/20 p-6">
             <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
-              <div className="space-y-2">
+              <div className="space-y-3">
                 <div className="flex items-center gap-3">
-                  <div className="h-10 w-10 rounded-xl gradient-ai flex items-center justify-center pulse-glow">
-                    <Sparkles className="h-5 w-5 text-white" />
+                  <div className="h-12 w-12 rounded-xl bg-green-600 flex items-center justify-center pulse-glow">
+                    <Sparkles className="h-6 w-6 text-white" />
                   </div>
                   <div>
-                    <h1 className="text-3xl font-bold text-ai-gradient">
+                    <h1 className="text-4xl font-bold text-white">
                       Smart Todo
                     </h1>
-                    <p className="text-muted-foreground flex items-center gap-2">
-                      <Brain className="h-4 w-4" />
-                      AI-powered productivity at your fingertips
+                    <p className="text-gray-400 flex items-center gap-2">
+                      <Brain className="h-4 w-4 text-green-500" />
+                      AI-powered productivity for professionals
                     </p>
                   </div>
                 </div>
 
-                {/* AI Status Indicator */}
-                <div className="flex items-center gap-2">
-                  <Badge className="gradient-ai text-white">
-                    <Zap className="h-3 w-3 mr-1" />
+                {/* AI Status Indicators */}
+                <div className="flex items-center gap-3">
+                  <Badge className="bg-green-600 text-white border-green-500">
+                    <Activity className="h-3 w-3 mr-1" />
                     AI Active
                   </Badge>
-                  <Badge variant="outline" className="text-xs">
+                  <Badge
+                    variant="outline"
+                    className="text-green-400 border-green-500/50"
+                  >
                     <TrendingUp className="h-3 w-3 mr-1" />
                     Productivity: {stats?.productivityScore || 0}%
+                  </Badge>
+                  <Badge
+                    variant="outline"
+                    className="text-white border-gray-600"
+                  >
+                    <Zap className="h-3 w-3 mr-1" />
+                    Dark Mode
                   </Badge>
                 </div>
               </div>
 
               <div className="flex items-center gap-3">
                 <div className="relative">
-                  <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+                  <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
                   <Input
                     placeholder="Search with AI assistance..."
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
-                    className="pl-10 w-full lg:w-80 ai-glow"
+                    className="pl-10 w-full lg:w-80 bg-black border-green-500/30 text-white placeholder-gray-400 focus:border-green-500"
                   />
                 </div>
                 <Button
                   variant="outline"
                   size="icon"
-                  className="hover:shadow-glow"
+                  className="border-green-500/30 text-white hover:bg-green-600/20"
                 >
                   <Filter className="h-4 w-4" />
                 </Button>
-                <Button
-                  onClick={() => setIsCreateDialogOpen(true)}
-                  className="gap-2 gradient-ai shadow-glow hover:shadow-glow-strong"
-                >
+                <Button className="gap-2 bg-green-600 hover:bg-green-500 text-white">
                   <Plus className="h-4 w-4" />
                   AI Task
                 </Button>
@@ -163,118 +169,116 @@ export default function Index() {
           </div>
 
           <div className="p-6 space-y-6">
-            {/* Enhanced Dashboard Stats */}
+            {/* Dark Stats Cards with Green Accents */}
             {stats && (
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-                <Card className="glass hover:shadow-glow transition-all duration-300 border-l-4 border-l-ai-primary">
+                <Card className="glass border-l-4 border-l-green-500 hover:shadow-green-glow transition-all duration-300">
                   <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                    <CardTitle className="text-sm font-medium">
+                    <CardTitle className="text-sm font-medium text-white">
                       Total Tasks
                     </CardTitle>
-                    <BarChart3 className="h-4 w-4 text-ai-primary" />
+                    <BarChart3 className="h-4 w-4 text-green-500" />
                   </CardHeader>
                   <CardContent>
-                    <div className="text-2xl font-bold text-ai-gradient">
+                    <div className="text-2xl font-bold text-green-400">
                       {stats.totalTasks}
                     </div>
-                    <p className="text-xs text-muted-foreground">
+                    <p className="text-xs text-gray-400">
                       {stats.completedTasks} completed today
                     </p>
                   </CardContent>
                 </Card>
 
-                <Card className="glass hover:shadow-glow transition-all duration-300 border-l-4 border-l-ai-secondary">
+                <Card className="glass border-l-4 border-l-green-400 hover:shadow-green-glow transition-all duration-300">
                   <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                    <CardTitle className="text-sm font-medium">
+                    <CardTitle className="text-sm font-medium text-white">
                       AI Score
                     </CardTitle>
-                    <Brain className="h-4 w-4 text-ai-secondary" />
+                    <Brain className="h-4 w-4 text-green-400" />
                   </CardHeader>
                   <CardContent>
-                    <div className="text-2xl font-bold text-ai-gradient">
+                    <div className="text-2xl font-bold text-green-300">
                       {stats.productivityScore}%
                     </div>
-                    <p className="text-xs text-muted-foreground">
-                      Productivity insights
+                    <p className="text-xs text-gray-400">
+                      AI productivity insights
                     </p>
                   </CardContent>
                 </Card>
 
-                <Card className="glass hover:shadow-glow transition-all duration-300 border-l-4 border-l-ai-accent">
+                <Card className="glass border-l-4 border-l-white hover:shadow-green-glow transition-all duration-300">
                   <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                    <CardTitle className="text-sm font-medium">
+                    <CardTitle className="text-sm font-medium text-white">
                       Active Tasks
                     </CardTitle>
-                    <Zap className="h-4 w-4 text-ai-accent" />
+                    <Zap className="h-4 w-4 text-white" />
                   </CardHeader>
                   <CardContent>
-                    <div className="text-2xl font-bold text-ai-gradient">
+                    <div className="text-2xl font-bold text-white">
                       {stats.pendingTasks}
                     </div>
-                    <p className="text-xs text-muted-foreground">
+                    <p className="text-xs text-gray-400">
                       {stats.overdueTasks} need attention
                     </p>
                   </CardContent>
                 </Card>
 
-                <Card className="glass hover:shadow-glow transition-all duration-300 border-l-4 border-l-green-500">
+                <Card className="glass border-l-4 border-l-green-600 hover:shadow-green-glow transition-all duration-300">
                   <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                    <CardTitle className="text-sm font-medium">
+                    <CardTitle className="text-sm font-medium text-white">
                       This Week
                     </CardTitle>
-                    <TrendingUp className="h-4 w-4 text-green-500" />
+                    <TrendingUp className="h-4 w-4 text-green-600" />
                   </CardHeader>
                   <CardContent>
-                    <div className="text-2xl font-bold text-ai-gradient">
+                    <div className="text-2xl font-bold text-green-500">
                       {stats.weeklyProgress?.reduce(
                         (acc, day) => acc + day.completed,
                         0,
                       ) || 0}
                     </div>
-                    <p className="text-xs text-muted-foreground">
-                      Tasks completed
-                    </p>
+                    <p className="text-xs text-gray-400">Tasks completed</p>
                   </CardContent>
                 </Card>
               </div>
             )}
 
-            {/* AI Insights Panel */}
-            <Card className="glass gradient-ai-soft border ai-glow">
+            {/* AI Insights Panel - Dark with Green */}
+            <Card className="glass border border-green-500/30 bg-black/90">
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
-                  <Brain className="h-5 w-5 text-ai-primary" />
-                  <span className="text-ai-gradient">AI Insights</span>
+                  <Brain className="h-5 w-5 text-green-500" />
+                  <span className="text-white">AI Insights</span>
                 </CardTitle>
               </CardHeader>
               <CardContent>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                   <div className="space-y-2">
-                    <h4 className="font-medium text-sm flex items-center gap-2">
-                      <Sparkles className="h-4 w-4 text-ai-primary" />
+                    <h4 className="font-medium text-sm flex items-center gap-2 text-green-400">
+                      <Sparkles className="h-4 w-4" />
                       Smart Suggestions
                     </h4>
-                    <p className="text-xs text-muted-foreground">
+                    <p className="text-xs text-gray-300">
                       Your morning productivity is 40% higher. Schedule
                       important tasks between 9-11 AM.
                     </p>
                   </div>
                   <div className="space-y-2">
-                    <h4 className="font-medium text-sm flex items-center gap-2">
-                      <TrendingUp className="h-4 w-4 text-ai-secondary" />
+                    <h4 className="font-medium text-sm flex items-center gap-2 text-white">
+                      <TrendingUp className="h-4 w-4" />
                       Pattern Analysis
                     </h4>
-                    <p className="text-xs text-muted-foreground">
+                    <p className="text-xs text-gray-300">
                       You complete 73% more tasks when you break them into
                       smaller steps.
                     </p>
                   </div>
                   <div className="space-y-2">
-                    <h4 className="font-medium text-sm flex items-center gap-2">
-                      <Zap className="h-4 w-4 text-ai-accent" />
+                    <h4 className="font-medium text-sm flex items-center gap-2 text-green-300">
+                      <Zap className="h-4 w-4" />
                       Quick Action
                     </h4>
-                    <p className="text-xs text-muted-foreground">
+                    <p className="text-xs text-gray-300">
                       2 high-priority tasks detected. Consider focusing on these
                       first.
                     </p>
@@ -283,12 +287,14 @@ export default function Index() {
               </CardContent>
             </Card>
 
-            {/* Enhanced Category Filter */}
+            {/* Category Filter - Dark Theme */}
             <div className="flex gap-2 overflow-x-auto pb-2">
               <Badge
                 variant={selectedCategory === "all" ? "default" : "secondary"}
                 className={`cursor-pointer whitespace-nowrap ${
-                  selectedCategory === "all" ? "gradient-ai text-white" : ""
+                  selectedCategory === "all"
+                    ? "bg-green-600 text-white hover:bg-green-500"
+                    : "bg-gray-800 text-gray-300 hover:bg-gray-700"
                 }`}
                 onClick={() => setSelectedCategory("all")}
               >
@@ -304,8 +310,8 @@ export default function Index() {
                     }
                     className={`cursor-pointer whitespace-nowrap ${
                       selectedCategory === category
-                        ? "gradient-ai text-white"
-                        : ""
+                        ? "bg-green-600 text-white hover:bg-green-500"
+                        : "bg-gray-800 text-gray-300 hover:bg-gray-700"
                     }`}
                     onClick={() => setSelectedCategory(category)}
                   >
@@ -315,24 +321,24 @@ export default function Index() {
               )}
             </div>
 
-            {/* Enhanced Tasks Grid */}
+            {/* Tasks Grid - Dark Theme */}
             {sortedTasks.length === 0 ? (
-              <Card className="glass ai-glow">
+              <Card className="glass border border-green-500/30">
                 <CardContent className="flex flex-col items-center justify-center py-16">
-                  <div className="h-20 w-20 rounded-full gradient-ai flex items-center justify-center mb-6 float">
-                    <Brain className="h-10 w-10 text-white" />
+                  <div className="h-24 w-24 rounded-full bg-green-600 flex items-center justify-center mb-6 float">
+                    <Brain className="h-12 w-12 text-white" />
                   </div>
-                  <h3 className="text-xl font-semibold text-ai-gradient mb-3">
+                  <h3 className="text-2xl font-semibold text-white mb-3">
                     AI Ready to Help!
                   </h3>
-                  <p className="text-muted-foreground text-center mb-6 max-w-md">
+                  <p className="text-gray-400 text-center mb-6 max-w-md leading-relaxed">
                     {searchQuery || selectedCategory !== "all"
                       ? "No tasks match your current filters. Try adjusting your search or ask our AI assistant for help."
                       : "Welcome to your intelligent task manager! Create your first task and let AI enhance your productivity."}
                   </p>
                   <Button
                     onClick={() => setIsCreateDialogOpen(true)}
-                    className="gap-2 gradient-ai shadow-glow"
+                    className="gap-2 bg-green-600 hover:bg-green-500 text-white"
                   >
                     <Sparkles className="h-4 w-4" />
                     Create AI-Powered Task
@@ -346,7 +352,7 @@ export default function Index() {
                     key={task.id}
                     task={task}
                     style={{ animationDelay: `${index * 100}ms` }}
-                    className="animate-fade-in hover:shadow-glow transition-all duration-300"
+                    className="animate-fade-in hover:shadow-green-glow transition-all duration-300"
                     onUpdate={fetchTasks}
                   />
                 ))}
@@ -362,7 +368,7 @@ export default function Index() {
         onTaskCreated={fetchTasks}
       />
 
-      {/* AI Chatbot */}
+      {/* AI Chatbot - Dark Theme */}
       <AIChatbot />
     </div>
   );
