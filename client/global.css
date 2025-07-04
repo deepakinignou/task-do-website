@@ -4,95 +4,111 @@
 
 @layer base {
   /**
-   * Smart Todo - Modern AI-Powered Task Management
-   * Color scheme: Deep blues and purples with bright accents
+   * Smart Todo - AI-Powered Task Management
+   * Improved color scheme with better contrast and AI-focused theme
    */
   :root {
-    --background: 250 250 254;
-    --foreground: 230 40% 12%;
+    --background: 252 252 255;
+    --foreground: 15 23 42;
 
     --card: 255 255 255;
-    --card-foreground: 230 40% 12%;
+    --card-foreground: 15 23 42;
 
     --popover: 255 255 255;
-    --popover-foreground: 230 40% 12%;
+    --popover-foreground: 15 23 42;
 
-    --primary: 245 75% 52%;
+    --primary: 99 102 241;
     --primary-foreground: 255 255 255;
 
-    --secondary: 245 20% 96%;
-    --secondary-foreground: 230 40% 16%;
+    --secondary: 241 245 249;
+    --secondary-foreground: 51 65 85;
 
-    --muted: 245 15% 95%;
-    --muted-foreground: 230 20% 45%;
+    --muted: 248 250 252;
+    --muted-foreground: 100 116 139;
 
-    --accent: 280 65% 60%;
+    --accent: 168 85 247;
     --accent-foreground: 255 255 255;
 
-    --destructive: 0 75% 60%;
+    --destructive: 239 68 68;
     --destructive-foreground: 255 255 255;
 
-    --success: 140 70% 45%;
+    --success: 34 197 94;
     --success-foreground: 255 255 255;
 
-    --warning: 35 85% 55%;
+    --warning: 245 158 11;
     --warning-foreground: 255 255 255;
 
-    --border: 245 20% 88%;
-    --input: 245 20% 92%;
-    --ring: 245 75% 52%;
+    --border: 226 232 240;
+    --input: 241 245 249;
+    --ring: 99 102 241;
 
     --radius: 0.75rem;
 
-    /* Custom Smart Todo colors */
-    --gradient-from: 245 85% 58%;
-    --gradient-to: 280 75% 65%;
-    --priority-high: 0 75% 60%;
-    --priority-medium: 35 85% 55%;
-    --priority-low: 140 70% 45%;
+    /* AI-themed colors */
+    --ai-primary: 99 102 241;
+    --ai-secondary: 168 85 247;
+    --ai-accent: 14 165 233;
+    --ai-glow: 139 92 246;
+    --priority-high: 239 68 68;
+    --priority-medium: 245 158 11;
+    --priority-low: 34 197 94;
+    --priority-urgent: 220 38 127;
+
+    /* Chat colors */
+    --chat-user: 99 102 241;
+    --chat-ai: 168 85 247;
+    --chat-bg: 248 250 252;
   }
 
   .dark {
-    --background: 230 40% 6%;
-    --foreground: 245 20% 95%;
+    --background: 15 23 42;
+    --foreground: 241 245 249;
 
-    --card: 230 35% 8%;
-    --card-foreground: 245 20% 95%;
+    --card: 30 41 59;
+    --card-foreground: 241 245 249;
 
-    --popover: 230 35% 8%;
-    --popover-foreground: 245 20% 95%;
+    --popover: 30 41 59;
+    --popover-foreground: 241 245 249;
 
-    --primary: 245 75% 55%;
-    --primary-foreground: 230 40% 6%;
+    --primary: 129 140 248;
+    --primary-foreground: 15 23 42;
 
-    --secondary: 230 25% 12%;
-    --secondary-foreground: 245 20% 85%;
+    --secondary: 51 65 85;
+    --secondary-foreground: 203 213 225;
 
-    --muted: 230 25% 10%;
-    --muted-foreground: 245 15% 65%;
+    --muted: 51 65 85;
+    --muted-foreground: 148 163 184;
 
-    --accent: 280 65% 65%;
-    --accent-foreground: 230 40% 6%;
+    --accent: 196 181 253;
+    --accent-foreground: 15 23 42;
 
-    --destructive: 0 75% 65%;
+    --destructive: 248 113 113;
     --destructive-foreground: 255 255 255;
 
-    --success: 140 70% 50%;
-    --success-foreground: 255 255 255;
+    --success: 74 222 128;
+    --success-foreground: 15 23 42;
 
-    --warning: 35 85% 60%;
-    --warning-foreground: 255 255 255;
+    --warning: 251 191 36;
+    --warning-foreground: 15 23 42;
 
-    --border: 230 25% 15%;
-    --input: 230 25% 12%;
-    --ring: 245 75% 55%;
+    --border: 51 65 85;
+    --input: 30 41 59;
+    --ring: 129 140 248;
 
-    /* Dark mode custom colors */
-    --gradient-from: 245 75% 55%;
-    --gradient-to: 280 65% 65%;
-    --priority-high: 0 75% 65%;
-    --priority-medium: 35 85% 60%;
-    --priority-low: 140 70% 50%;
+    /* Dark mode AI colors */
+    --ai-primary: 129 140 248;
+    --ai-secondary: 196 181 253;
+    --ai-accent: 56 189 248;
+    --ai-glow: 167 139 250;
+    --priority-high: 248 113 113;
+    --priority-medium: 251 191 36;
+    --priority-low: 74 222 128;
+    --priority-urgent: 244 114 182;
+
+    /* Dark chat colors */
+    --chat-user: 129 140 248;
+    --chat-ai: 196 181 253;
+    --chat-bg: 30 41 59;
   }
 }
 
@@ -115,22 +131,65 @@
 }
 
 @layer components {
-  /* Glass morphism effect */
+  /* Enhanced glass morphism effect */
   .glass {
-    @apply bg-white/80 backdrop-blur-xl border border-white/20;
+    @apply bg-white/70 backdrop-blur-xl border border-white/30 shadow-xl;
   }
 
   .dark .glass {
-    @apply bg-slate-900/80 backdrop-blur-xl border border-slate-700/30;
+    @apply bg-slate-800/70 backdrop-blur-xl border border-slate-600/30;
   }
 
-  /* Gradient backgrounds */
-  .gradient-primary {
+  /* AI-themed gradients */
+  .gradient-ai {
     background: linear-gradient(
       135deg,
-      hsl(var(--gradient-from)),
-      hsl(var(--gradient-to))
+      hsl(var(--ai-primary)),
+      hsl(var(--ai-secondary))
     );
+  }
+
+  .gradient-ai-soft {
+    background: linear-gradient(
+      135deg,
+      hsl(var(--ai-primary) / 0.1),
+      hsl(var(--ai-secondary) / 0.1)
+    );
+  }
+
+  /* AI glow effects */
+  .ai-glow {
+    box-shadow: 0 0 20px hsl(var(--ai-glow) / 0.3);
+  }
+
+  .ai-glow-strong {
+    box-shadow: 0 0 40px hsl(var(--ai-glow) / 0.5);
+  }
+
+  /* Chat bubbles */
+  .chat-user {
+    @apply bg-blue-600 text-white rounded-2xl rounded-br-md;
+  }
+
+  .chat-ai {
+    @apply bg-purple-600 text-white rounded-2xl rounded-bl-md;
+  }
+
+  /* Priority indicators */
+  .priority-urgent {
+    @apply bg-pink-600 text-white;
+  }
+
+  .priority-high {
+    @apply bg-red-500 text-white;
+  }
+
+  .priority-medium {
+    @apply bg-amber-500 text-white;
+  }
+
+  .priority-low {
+    @apply bg-green-500 text-white;
   }
 
   /* Custom scrollbar */
@@ -139,14 +198,56 @@
   }
 
   .custom-scrollbar::-webkit-scrollbar-track {
-    @apply bg-muted rounded-full;
+    @apply bg-muted/30 rounded-full;
   }
 
   .custom-scrollbar::-webkit-scrollbar-thumb {
-    @apply bg-muted-foreground/30 rounded-full;
+    @apply bg-muted-foreground/40 rounded-full;
   }
 
   .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-    @apply bg-muted-foreground/50;
+    @apply bg-muted-foreground/60;
+  }
+
+  /* Floating animation */
+  .float {
+    animation: float 3s ease-in-out infinite;
+  }
+
+  @keyframes float {
+    0%,
+    100% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+
+  /* Pulse glow animation */
+  .pulse-glow {
+    animation: pulse-glow 2s ease-in-out infinite;
+  }
+
+  @keyframes pulse-glow {
+    0%,
+    100% {
+      box-shadow: 0 0 20px hsl(var(--ai-glow) / 0.3);
+    }
+    50% {
+      box-shadow: 0 0 40px hsl(var(--ai-glow) / 0.6);
+    }
+  }
+
+  /* AI text gradient */
+  .text-ai-gradient {
+    background: linear-gradient(
+      135deg,
+      hsl(var(--ai-primary)),
+      hsl(var(--ai-secondary))
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
   }
 }

@@ -7,6 +7,8 @@ import {
   MoreVertical,
   Calendar,
   Tag,
+  Zap,
+  Sparkles,
 } from "lucide-react";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -29,18 +31,38 @@ interface TaskCardProps {
   style?: React.CSSProperties;
 }
 
-const priorityColors: Record<TaskPriority, string> = {
-  urgent: "bg-red-500 border-red-200",
-  high: "bg-orange-500 border-orange-200",
-  medium: "bg-yellow-500 border-yellow-200",
-  low: "bg-green-500 border-green-200",
-};
-
-const priorityTextColors: Record<TaskPriority, string> = {
-  urgent: "text-red-700 bg-red-50 border-red-200",
-  high: "text-orange-700 bg-orange-50 border-orange-200",
-  medium: "text-yellow-700 bg-yellow-50 border-yellow-200",
-  low: "text-green-700 bg-green-50 border-green-200",
+const priorityConfig: Record<
+  TaskPriority,
+  { color: string; borderColor: string; bgColor: string }
+> = {
+  urgent: {
+    color:
+      "text-pink-700 bg-pink-100 border-pink-300 dark:text-pink-300 dark:bg-pink-950/50 dark:border-pink-700",
+    borderColor: "border-l-pink-500",
+    bgColor:
+      "bg-gradient-to-r from-pink-50 to-red-50 dark:from-pink-950/20 dark:to-red-950/20",
+  },
+  high: {
+    color:
+      "text-red-700 bg-red-100 border-red-300 dark:text-red-300 dark:bg-red-950/50 dark:border-red-700",
+    borderColor: "border-l-red-500",
+    bgColor:
+      "bg-gradient-to-r from-red-50 to-orange-50 dark:from-red-950/20 dark:to-orange-950/20",
+  },
+  medium: {
+    color:
+      "text-amber-700 bg-amber-100 border-amber-300 dark:text-amber-300 dark:bg-amber-950/50 dark:border-amber-700",
+    borderColor: "border-l-amber-500",
+    bgColor:
+      "bg-gradient-to-r from-amber-50 to-yellow-50 dark:from-amber-950/20 dark:to-yellow-950/20",
+  },
+  low: {
+    color:
+      "text-green-700 bg-green-100 border-green-300 dark:text-green-300 dark:bg-green-950/50 dark:border-green-700",
+    borderColor: "border-l-green-500",
+    bgColor:
+      "bg-gradient-to-r from-green-50 to-emerald-50 dark:from-green-950/20 dark:to-emerald-950/20",
+  },
 };
 
 export function TaskCard({ task, onUpdate, className, style }: TaskCardProps) {
@@ -85,17 +107,23 @@ export function TaskCard({ task, onUpdate, className, style }: TaskCardProps) {
     new Date(task.deadline) < new Date() &&
     task.status !== "completed";
   const isCompleted = task.status === "completed";
+  const priorityStyle = priorityConfig[task.priority];
 
   return (
     <Card
       className={cn(
-        "glass hover:shadow-card-hover transition-all duration-200 border-l-4",
-        priorityColors[task.priority],
+        "glass hover:shadow-glow transition-all duration-300 border-l-4 group relative overflow-hidden",
+        priorityStyle.borderColor,
         isCompleted && "opacity-75",
         className,
       )}
       style={style}
     >
+      {/* AI Glow Effect for High AI Score */}
+      {task.aiScore && task.aiScore > 80 && (
+        <div className="absolute inset-0 bg-gradient-to-r from-ai-primary/5 to-ai-secondary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+      )}
+
       <CardHeader className="pb-3">
         <div className="flex items-start justify-between gap-3">
           <div className="flex items-start gap-3 flex-1">
@@ -109,7 +137,7 @@ export function TaskCard({ task, onUpdate, className, style }: TaskCardProps) {
               {isCompleted ? (
                 <CheckCircle2 className="h-5 w-5 text-green-600" />
               ) : (
-                <Circle className="h-5 w-5 text-muted-foreground hover:text-primary" />
+                <Circle className="h-5 w-5 text-muted-foreground hover:text-ai-primary transition-colors" />
               )}
             </Button>
 
@@ -133,7 +161,11 @@ export function TaskCard({ task, onUpdate, className, style }: TaskCardProps) {
 
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button variant="ghost" size="sm" className="h-8 w-8 p-0">
+              <Button
+                variant="ghost"
+                size="sm"
+                className="h-8 w-8 p-0 opacity-0 group-hover:opacity-100 transition-opacity"
+              >
                 <MoreVertical className="h-4 w-4" />
               </Button>
             </DropdownMenuTrigger>
@@ -150,9 +182,10 @@ export function TaskCard({ task, onUpdate, className, style }: TaskCardProps) {
       </CardHeader>
 
       <CardContent className="space-y-4">
-        {/* Priority and Category */}
+        {/* Enhanced Priority and Category */}
         <div className="flex items-center gap-2 flex-wrap">
-          <Badge className={cn("text-xs", priorityTextColors[task.priority])}>
+          <Badge className={cn("text-xs font-medium", priorityStyle.color)}>
+            <Zap className="h-3 w-3 mr-1" />
             {task.priority.charAt(0).toUpperCase() + task.priority.slice(1)}
           </Badge>
 
@@ -162,18 +195,49 @@ export function TaskCard({ task, onUpdate, className, style }: TaskCardProps) {
           </Badge>
 
           {task.aiScore && (
-            <Badge variant="outline" className="text-xs">
+            <Badge
+              variant="outline"
+              className={cn(
+                "text-xs",
+                task.aiScore > 80 && "gradient-ai text-white border-ai-primary",
+              )}
+            >
               <Brain className="h-3 w-3 mr-1" />
               AI {Math.round(task.aiScore)}%
             </Badge>
           )}
         </div>
 
-        {/* Tags */}
+        {/* AI Score Progress Bar */}
+        {task.aiScore && (
+          <div className="space-y-2">
+            <div className="flex items-center justify-between text-xs">
+              <span className="text-muted-foreground flex items-center gap-1">
+                <Sparkles className="h-3 w-3" />
+                AI Confidence
+              </span>
+              <span className="font-medium">{Math.round(task.aiScore)}%</span>
+            </div>
+            <Progress
+              value={task.aiScore}
+              className={cn(
+                "h-2",
+                task.aiScore > 80 &&
+                  "bg-gradient-to-r from-ai-primary to-ai-secondary",
+              )}
+            />
+          </div>
+        )}
+
+        {/* Enhanced Tags */}
         {task.tags.length > 0 && (
           <div className="flex flex-wrap gap-1">
             {task.tags.slice(0, 3).map((tag) => (
-              <Badge key={tag} variant="secondary" className="text-xs">
+              <Badge
+                key={tag}
+                variant="secondary"
+                className="text-xs hover:bg-ai-primary hover:text-white transition-colors"
+              >
                 {tag}
               </Badge>
             ))}
@@ -185,24 +249,28 @@ export function TaskCard({ task, onUpdate, className, style }: TaskCardProps) {
           </div>
         )}
 
-        {/* Deadline */}
+        {/* Enhanced Deadline */}
         {task.deadline && (
           <div
             className={cn(
-              "flex items-center gap-2 text-sm",
-              isOverdue ? "text-destructive" : "text-muted-foreground",
+              "flex items-center gap-2 text-sm px-2 py-1 rounded-md",
+              isOverdue
+                ? "text-red-700 bg-red-50 border border-red-200 dark:text-red-300 dark:bg-red-950/50"
+                : "text-muted-foreground bg-muted/50",
             )}
           >
             <Calendar className="h-4 w-4" />
             <span>{formatDate(task.deadline)}</span>
-            {isOverdue && <span className="text-xs">(Overdue)</span>}
+            {isOverdue && (
+              <span className="text-xs font-medium">(Overdue)</span>
+            )}
           </div>
         )}
 
-        {/* AI Suggestions */}
+        {/* Enhanced AI Suggestions */}
         {task.aiSuggestions && task.aiSuggestions.length > 0 && (
-          <div className="space-y-2">
-            <div className="flex items-center gap-2 text-xs font-medium text-muted-foreground">
+          <div className="space-y-2 p-3 rounded-lg gradient-ai-soft border">
+            <div className="flex items-center gap-2 text-xs font-medium text-ai-primary">
               <Brain className="h-3 w-3" />
               AI Suggestions
             </div>
@@ -210,7 +278,7 @@ export function TaskCard({ task, onUpdate, className, style }: TaskCardProps) {
               {task.aiSuggestions.slice(0, 2).map((suggestion, index) => (
                 <p
                   key={index}
-                  className="text-xs text-muted-foreground bg-muted/50 rounded px-2 py-1"
+                  className="text-xs text-muted-foreground bg-white/50 dark:bg-slate-800/50 rounded px-2 py-1 border"
                 >
                   {suggestion}
                 </p>
@@ -219,26 +287,30 @@ export function TaskCard({ task, onUpdate, className, style }: TaskCardProps) {
           </div>
         )}
 
-        {/* Progress indicator for in-progress tasks */}
+        {/* Enhanced Progress for in-progress tasks */}
         {task.status === "in-progress" && (
           <div className="space-y-2">
             <div className="flex items-center justify-between text-xs">
-              <span className="text-muted-foreground">Progress</span>
-              <span className="font-medium">In Progress</span>
+              <span className="text-muted-foreground flex items-center gap-1">
+                <Zap className="h-3 w-3" />
+                Progress
+              </span>
+              <span className="font-medium text-ai-primary">In Progress</span>
             </div>
             <Progress value={65} className="h-2" />
           </div>
         )}
 
-        {/* Time info */}
+        {/* Enhanced Footer */}
         <div className="flex items-center justify-between text-xs text-muted-foreground pt-2 border-t">
           <div className="flex items-center gap-1">
             <Clock className="h-3 w-3" />
-            Created {new Date(task.createdAt).toLocaleDateString()}
+            {new Date(task.createdAt).toLocaleDateString()}
           </div>
           {task.status === "completed" && (
-            <Badge variant="outline" className="text-xs text-green-600">
-              ✓ Completed
+            <Badge className="text-xs bg-green-100 text-green-700 dark:bg-green-950/50 dark:text-green-300">
+              <CheckCircle2 className="h-3 w-3 mr-1" />
+              Completed
             </Badge>
           )}
         </div>
