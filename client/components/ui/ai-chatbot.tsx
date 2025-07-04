@@ -166,10 +166,15 @@ export function AIChatbot({ className }: AIChatbotProps) {
       <div className={cn("fixed bottom-6 right-6 z-50", className)}>
         <Button
           onClick={() => setIsOpen(true)}
-          className="h-14 w-14 rounded-full shadow-glow-strong gradient-ai pulse-glow"
+          className="h-14 w-14 rounded-full shadow-glow-strong bg-green-600 hover:bg-green-500 pulse-glow relative overflow-hidden"
           size="icon"
         >
-          <Bot className="h-6 w-6" />
+          {/* AI Brain Icon with Sparkles */}
+          <div className="relative">
+            <Brain className="h-6 w-6 text-white" />
+            <Sparkles className="h-3 w-3 text-green-200 absolute -top-1 -right-1 animate-pulse" />
+            <div className="absolute -bottom-1 -left-1 w-2 h-2 bg-green-300 rounded-full animate-ping" />
+          </div>
         </Button>
       </div>
     );
@@ -186,8 +191,9 @@ export function AIChatbot({ className }: AIChatbotProps) {
         <CardHeader className="p-4 border-b">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <div className="h-8 w-8 rounded-full gradient-ai flex items-center justify-center">
-                <Bot className="h-4 w-4 text-white" />
+              <div className="h-8 w-8 rounded-full bg-green-600 flex items-center justify-center relative">
+                <Brain className="h-4 w-4 text-white" />
+                <div className="absolute -top-0.5 -right-0.5 w-2 h-2 bg-green-300 rounded-full animate-pulse" />
               </div>
               <div>
                 <CardTitle className="text-sm text-ai-gradient">
